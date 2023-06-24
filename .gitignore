@@ -1,0 +1,7 @@
+patches/
+*.orig
+*.rej
+*.o
+
+xembed
+tabbed
