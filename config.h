@@ -1,27 +1,27 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]        = "monospace:size=9";
-static const char* normbgcolor  = "#222222";
-static const char* normfgcolor  = "#cccccc";
-static const char* selbgcolor   = "#555555";
-static const char* selfgcolor   = "#ffffff";
-static const char* urgbgcolor   = "#111111";
-static const char* urgfgcolor   = "#cc0000";
-static const char before[]      = "<";
-static const char after[]       = ">";
-static const char titletrim[]   = "...";
-static const int  tabwidth      = 200;
-static const Bool foreground    = True;
-static       Bool urgentswitch  = False;
+static char* font         = "monospace:size=9";
+static char* normbgcolor  = "#222222";
+static char* normfgcolor  = "#cccccc";
+static char* selbgcolor   = "#555555";
+static char* selfgcolor   = "#ffffff";
+static char* urgbgcolor   = "#111111";
+static char* urgfgcolor   = "#cc0000";
+static char* before       = "<";
+static char* after        = ">";
+static char* titletrim    = "...";
+static int tabwidth       = 200;
+static int focusnew       = 1;
+static int urgentswitch   = 0;
 
 /*
  * Where to place a new tab when it is opened. When npisrelative is True,
  * then the current position is changed + newposition. If npisrelative
  * is False, then newposition is an absolute position.
  */
-static int  newposition   = 0;
-static Bool npisrelative  = False;
+static int newposition   = 0;
+static int npisrelative  = 0;
 
 #define SETPROP(p) { \
         .v = (char *[]){ "/bin/sh", "-c", \
@@ -32,6 +32,27 @@ static Bool npisrelative  = False;
                 p, winid, NULL \
         } \
 }
+
+/*
+ * Xresources preferences to load at startup
+ */
+ResourcePref resources[] = {
+	{ "font",         STRING,  &font},
+	{ "normbgcolor",  STRING,  &normbgcolor},
+	{ "normfgcolor",  STRING,  &normfgcolor},
+	{ "selbgcolor",   STRING,  &selbgcolor},
+	{ "selfgcolor",   STRING,  &selfgcolor},
+	{ "urgbgcolor",   STRING,  &urgbgcolor},
+	{ "urgfgcolor",   STRING,  &urgfgcolor},
+	{ "before",       STRING,  &before},
+	{ "after",        STRING,  &after},
+	{ "titletrim",    STRING,  &titletrim},
+	{ "tabwidth",     INTEGER, &tabwidth},
+	{ "focusnew",     INTEGER, &focusnew},
+	{ "urgentswitch", INTEGER, &urgentswitch},
+	{ "newposition",  INTEGER, &newposition},
+	{ "npisrelative", INTEGER, &npisrelative},
+};
 
 #define MODKEY ControlMask
 static const Key keys[] = {
